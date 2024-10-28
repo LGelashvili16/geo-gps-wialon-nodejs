@@ -2,8 +2,11 @@
 
 import { getAllItems, getSid } from "../services/apiService.js";
 
-const eid = await getSid();
-
-const allItems = await getAllItems(eid);
-
-console.log(allItems);
+export const fetchDataAndSave = async (req, res, next) => {
+  try {
+    const eid = await getSid();
+    const allItems = await getAllItems(eid);
+  } catch (error) {
+    next(error);
+  }
+};
