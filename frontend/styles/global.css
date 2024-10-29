@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@100..900&display=swap");
+@import url("./normalize.css");
+
+:root {
+  font-family: "Noto Sans Georgian", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #242424; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100lvh;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.cards-header {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+.oil-can-wrapper {
+  max-width: 70px;
+  max-height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.oil-can-wrapper img {
+  width: 100%;
+  object-position: 0 -1em;
+}
+
+.cards-header h1 {
+  font-size: 1.7em;
+  color: #ff7829;
+}
+
+.cars-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+  gap: 1em;
+}
+
+.car-card {
+  padding: 1em 1.5em;
+  border: 1px solid white;
+  border-radius: 0.5em;
+  box-shadow: 0 0 20px 5px #e6e6e6;
+  transition: box-shadow 0.4s;
+}
+
+.car-card:hover {
+  box-shadow: 0 0 25px 5px #bbbbbb;
+}
+
+.car-name {
+  margin: 0;
+}
+
+button {
+  border-radius: 0.5em;
+  border: 1px solid transparent;
+  padding: 0.6em 1em;
+  font-size: 0.9em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: #ff7829;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+button:hover {
+  background-color: #d74f00;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

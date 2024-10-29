@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { errorHandler } from "./middleware/errorHandler.js";
-import { router as carsRouter } from "./routes/proxyRoutes.js";
+import { router as carsRouter } from "./routes/carsRoutes.js";
 dotenv.config();
 
 const app = express();
