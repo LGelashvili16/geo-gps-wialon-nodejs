@@ -1,29 +1,22 @@
-CREATE DATABASE car_data;
-USE car_data;
-
-CREATE TABLE covered_distance (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    car_id VARCHAR(255) NOT NULL,
-    distance INT NOT NULL,
-    last_reset TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
+CREATE DATABASE cars_db;
+USE cars_db;
 
 -- Separate table for history
-CREATE TABLE cars (
-  car_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE cars_tb (
+  car_id INT PRIMARY KEY,
   car_name VARCHAR(255) NOT NULL,
   total_distance INT DEFAULT 0,
   next_oil_change_km INT DEFAULT 10000,
   last_reset_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE oil_change_history (
+CREATE TABLE oil_change_history_tb (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  car_id INT,
+  car_id INT, 
   oil_change_date DATE,
   kilometers INT,
-  FOREIGN KEY (car_id) REFERENCES cars(car_id) ON DELETE CASCADE
+  FOREIGN KEY (car_id) REFERENCES cars_tb(car_id) ON DELETE CASCADE,
+  INDEX(car_id)
 );
 
 -- Insert in history

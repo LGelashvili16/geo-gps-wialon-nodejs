@@ -9,7 +9,7 @@ const carsContainer = document.querySelector(".cars-container");
 
 console.log(carsData);
 carsData.forEach((car) => {
-  const card = createCarCard(car.nm, car.cnm_km);
+  const card = createCarCard(car.nm, car.cnm_km, car.uri);
   fragment.appendChild(card);
 });
 

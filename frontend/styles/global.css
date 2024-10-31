@@ -29,8 +29,24 @@ body {
 
 #app {
   max-width: 1280px;
+  min-height: 100lvh;
   margin: 0 auto;
   padding: 2rem;
+  background-color: #ffffffbd;
+}
+
+#app::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 90%;
+  background: radial-gradient(#fca503, #fff);
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -10;
 }
 
 .main {
@@ -57,6 +73,10 @@ body {
   object-position: 0 -1em;
 }
 
+.car-card {
+  background-color: #fff;
+}
+
 .cards-header h1 {
   font-size: 1.7em;
   color: #ff7829;
@@ -70,6 +90,9 @@ body {
 }
 
 .car-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   padding: 1em 1.5em;
   border: 1px solid white;
   border-radius: 0.5em;
@@ -81,15 +104,47 @@ body {
   box-shadow: 0 0 25px 5px #bbbbbb;
 }
 
+.card-header-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.img-container {
+  max-width: 10%;
+}
+
+.car-icon {
+  width: 100%;
+  height: 100%;
+}
+
 .car-name {
   margin: 0;
+}
+
+.car-distance {
+  margin: 0;
+}
+
+.car-distance span {
+  color: #00a349;
+  font-weight: 600;
+}
+
+.card-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  border-top: 1px solid #cfcfcf;
+  padding-top: 1em;
 }
 
 button {
   border-radius: 0.5em;
   border: 1px solid transparent;
-  padding: 0.6em 1em;
-  font-size: 0.9em;
+  padding: 0.5em 0.7em;
+  font-size: 0.85em;
   font-weight: 500;
   font-family: inherit;
   color: #ffffff;
@@ -101,8 +156,16 @@ button:hover {
   background-color: #d74f00;
 }
 
-button:active {
-  transform: scale(0.95);
+button:active,
+.history-btn:active {
+  transform: scale(0.99);
+}
+
+.history-btn {
+  background-color: #3477f3;
+}
+.history-btn:hover {
+  background-color: #1145a7;
 }
 
 @media (prefers-color-scheme: light) {

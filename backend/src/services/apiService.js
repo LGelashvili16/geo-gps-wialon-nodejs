@@ -40,7 +40,9 @@ export const getAllItems = async (sid) => {
       sortType: "sys_name",
     },
     force: 1,
-    flags: 8397079,
+    // flags: 8397079,
+    // flags: 4294967295,
+    flags: 8217,
     from: 0,
     to: 0,
   });
