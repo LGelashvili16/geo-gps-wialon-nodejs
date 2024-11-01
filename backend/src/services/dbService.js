@@ -1,17 +1,30 @@
 import { dbPool } from "../config/db.js";
 
+export const carExists = async (car_id) => {
+  const query = `SELECT 1 FROM cars_tb WHERE car_id = ? LIMIT 1`;
+  const [rows] = await dbPool.query(query, [car_id]);
+  return rows.length > 0;
+};
+
 export const addCarToCarsTable = async (
   car_id,
   car_name,
+  icon_url,
   total_distance = 0,
   next_oil_change_km = 10000
 ) => {
   const query = `
-    INSERT INTO cars_tb (car_id, car_name, total_distance, next_oil_change_km) 
-    VALUES (?, ?, ?, ?)
+    INSERT INTO cars_tb (car_id, car_name, icon_url, total_distance, next_oil_change_km) 
+    VALUES (?, ?, ?, ?, ?)
   `;
 
-  const queryArgs = [car_id, car_name, total_distance, next_oil_change_km];
+  const queryArgs = [
+    car_id,
+    car_name,
+    icon_url,
+    total_distance,
+    next_oil_change_km,
+  ];
 
   try {
     const [dbResult] = await dbPool.query(query, queryArgs);
@@ -23,11 +36,11 @@ export const addCarToCarsTable = async (
   }
 };
 
-try {
-  const result = await addCarToCarsTable(15011, "WI 111 NG", 275250);
-} catch (error) {
-  console.error(error);
-}
+// try {
+//   const result = await addCarToCarsTable(15011, "WI 111 NG", 275250);
+// } catch (error) {
+//   console.error(error);
+// }
 
 export const addOilChangeRecord = async (
   car_id,
@@ -57,24 +70,14 @@ export const addOilChangeRecord = async (
 //   console.error(error);
 // }
 
-export const getAllCarsWithoutHistory = async () => {
-  try {
-    const [rows] = await dbPool.query("SELECT * FROM cars_tb");
-    console.log("All Cars:", rows);
-    return rows;
-  } catch (error) {
-    console.error("Error getting cars data:", error);
-    throw error;
-  }
-};
-
 export const getAllCarsWithHistory = async () => {
   const query = `
     SELECT 
       c.car_id, 
       c.car_name, 
       c.total_distance, 
-      c.next_oil_change_km, 
+      c.next_oil_change_km,
+      c.icon_url,
       c.last_reset_date,
       h.id AS oil_change_id, 
       h.oil_change_date, 
@@ -99,6 +102,7 @@ export const getAllCarsWithHistory = async () => {
           car_name: row.car_name,
           total_distance: row.total_distance,
           next_oil_change_km: row.next_oil_change_km,
+          icon_url: row.icon_url,
           last_reset_date: row.last_reset_date,
           history: [],
         };
@@ -137,6 +141,7 @@ export const getCarWithHistory = async (car_id) => {
       c.car_name, 
       c.total_distance, 
       c.next_oil_change_km, 
+      c.icon_url,
       c.last_reset_date, 
       o.id AS oil_change_id, 
       o.oil_change_date, 
@@ -163,6 +168,7 @@ export const getCarWithHistory = async (car_id) => {
       car_name: rows[0].car_name,
       total_distance: rows[0].total_distance,
       next_oil_change_km: rows[0].next_oil_change_km,
+      icon_url: rows[0].icon_url,
       last_reset_date: rows[0].last_reset_date,
       history: rows
         .filter((row) => row.oil_change_id !== null)
@@ -186,3 +192,21 @@ export const getCarWithHistory = async (car_id) => {
 // } catch (error) {
 //   console.error(error);
 // }
+
+export const updateTotalDistance = async (carId, newDistance) => {
+  const result = await db.query(
+    `UPDATE cars_tb SET total_distance = ? WHERE car_id = ?`,
+    [newDistance, carId]
+  );
+
+  return result;
+};
+
+export const updateInitialDistance = async (carId, newInitialDistance) => {
+  const result = await db.query(
+    `UPDATE cars_tb SET initial_distance = ?, last_reset_date = NOW() WHERE car_id = ?`,
+    [newInitialDistance, carId]
+  );
+
+  return result;
+};

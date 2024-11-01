@@ -5,6 +5,8 @@ USE cars_db;
 CREATE TABLE cars_tb (
   car_id INT PRIMARY KEY,
   car_name VARCHAR(255) NOT NULL,
+  icon_url VARCHAR(255),
+  initial_distance INT DEFAULT 0, 
   total_distance INT DEFAULT 0,
   next_oil_change_km INT DEFAULT 10000,
   last_reset_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
