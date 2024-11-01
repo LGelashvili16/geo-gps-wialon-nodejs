@@ -10,18 +10,20 @@ export const addCarToCarsTable = async (
   car_id,
   car_name,
   icon_url,
+  initial_distance,
   total_distance = 0,
   next_oil_change_km = 10000
 ) => {
   const query = `
-    INSERT INTO cars_tb (car_id, car_name, icon_url, total_distance, next_oil_change_km) 
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO cars_tb (car_id, car_name, icon_url, initial_distance, total_distance, next_oil_change_km) 
+    VALUES (?, ?, ?, ?, ?, ?)
   `;
 
   const queryArgs = [
     car_id,
     car_name,
     icon_url,
+    initial_distance,
     total_distance,
     next_oil_change_km,
   ];
@@ -75,6 +77,7 @@ export const getAllCarsWithHistory = async () => {
     SELECT 
       c.car_id, 
       c.car_name, 
+      c.initial_distance,
       c.total_distance, 
       c.next_oil_change_km,
       c.icon_url,
@@ -100,6 +103,7 @@ export const getAllCarsWithHistory = async () => {
         car = {
           car_id: row.car_id,
           car_name: row.car_name,
+          initial_distance: row.initial_distance,
           total_distance: row.total_distance,
           next_oil_change_km: row.next_oil_change_km,
           icon_url: row.icon_url,
@@ -194,7 +198,7 @@ export const getCarWithHistory = async (car_id) => {
 // }
 
 export const updateTotalDistance = async (carId, newDistance) => {
-  const result = await db.query(
+  const result = await dbPool.query(
     `UPDATE cars_tb SET total_distance = ? WHERE car_id = ?`,
     [newDistance, carId]
   );
@@ -203,7 +207,7 @@ export const updateTotalDistance = async (carId, newDistance) => {
 };
 
 export const updateInitialDistance = async (carId, newInitialDistance) => {
-  const result = await db.query(
+  const result = await dbPool.query(
     `UPDATE cars_tb SET initial_distance = ?, last_reset_date = NOW() WHERE car_id = ?`,
     [newInitialDistance, carId]
   );
