@@ -1,0 +1,72 @@
+.history-container {
+  position: absolute;
+  inset: 15% 17%;
+  display: flex;
+  visibility: hidden;
+  flex-direction: column;
+  background-color: #7a7a7aa4;
+  backdrop-filter: blur(5px);
+  border-radius: 0.6em;
+  transform: translate(-150%, 0);
+  overflow-y: scroll;
+  transition: 0.4s ease;
+}
+
+.history-active {
+  visibility: visible;
+  transform: translate(0, 0);
+}
+
+.table-header {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e4e4e496;
+  border-top-left-radius: 0.6em;
+  border-top-right-radius: 0.6em;
+}
+
+.oil-change-table {
+  background-color: #ffffff62;
+  border-collapse: collapse;
+  border-radius: 0.6em;
+  font-size: 0.9em;
+  margin: 1em;
+  overflow-y: scroll;
+}
+
+.oil-change-table thead tr {
+  text-align: left;
+  background-color: #fcca9079;
+  font-weight: bold;
+}
+
+.oil-change-table thead tr th:first-child {
+  border-top-left-radius: 0.6em;
+}
+
+.oil-change-table thead tr th:last-child {
+  border-top-right-radius: 0.6em;
+}
+
+.oil-change-table th,
+.oil-change-table td {
+  padding: 0.8em 0.9em;
+}
+
+.oil-change-table tbody tr {
+  padding: 1em;
+}
+
+.oil-change-table tbody tr:nth-child(odd) {
+  background-color: #ffffff96;
+}
+
+.oil-change-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 0.6em;
+}
+
+.oil-change-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 0.6em;
+}

@@ -1,0 +1,155 @@
+.car-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  height: fit-content;
+  position: relative;
+  padding: 1em 1.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 0 20px 5px #e6e6e6;
+  transition: box-shadow 0.4s;
+}
+
+.car-card:hover {
+  box-shadow: 0 0 25px 5px #bbbbbb;
+}
+
+.card-cta {
+  position: absolute;
+  inset: 0;
+  top: 25%;
+  padding: 1em;
+  display: flex;
+  visibility: hidden;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  background-color: #7979795d;
+  backdrop-filter: blur(7px);
+  height: 70%;
+  transform: translate(40%, -60%) scale(0);
+  border-radius: 50%;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.active-cta {
+  visibility: visible;
+  border-radius: 0.5em;
+  height: auto;
+  transform: translate(0, 0) scale(1);
+}
+
+.card-cta form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  border-top: 1px solid #5e5d5d;
+  padding-top: 0.5em;
+}
+
+.card-cta form label {
+  font-size: 0.9em;
+}
+
+.card-cta form div {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.card-cta form div input {
+  padding: 0.2em;
+}
+
+.card-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.img-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.car-icon {
+  width: 10%;
+}
+
+.car-name {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  outline: none;
+  transition: transform 0.3s;
+}
+
+.settings-btn:hover {
+  transform: rotate(45deg);
+}
+
+.settings-btn img {
+  display: block;
+  height: 20px;
+}
+
+.btn {
+  padding: 0.5em 0.7em;
+  font-size: 0.8em;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 0.3em;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #d74f00;
+}
+
+.btn:active,
+.history-btn:active {
+  transform: scale(0.99);
+}
+
+.reset-distance-btn {
+  color: #fff;
+  background-color: #ff2929;
+  border: 1px solid transparent;
+}
+
+.change-threshold-btn {
+  color: #fff;
+  background-color: #ff7829;
+  border: 1px solid transparent;
+}
+
+.history-btn {
+  background-color: #3477f3;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.history-btn:hover {
+  background-color: #1145a7;
+}
+
+.car-distance-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.distance-detail {
+  display: flex;
+  justify-content: space-between;
+}
