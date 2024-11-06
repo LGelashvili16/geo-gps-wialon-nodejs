@@ -8,3 +8,5 @@ export const LOGOUT_URL =
 
 export const ALL_CARS_URL =
   "https://local.geogps.ge/wialon/ajax.html?svc=core/search_items&params=";
+
+export const PROXY_SERVER = "http://localhost:3000";

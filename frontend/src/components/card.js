@@ -1,7 +1,9 @@
-// import { addOilChangeRecord } from "../../../backend/src/services/dbService";
 import { BASE_URL } from "../config/apiEndpoints";
+import { initialization } from "../main";
+import { resetInterval } from "../services/api";
 import { getRemainingDistanceDetails } from "../utils/distanceCalculation";
-import { changeHistoryCarName, createOilChangeHistory } from "./history";
+import { changeHistoryCarName, createOilChangeHistoryTable } from "./history";
+import { showToastNotification } from "./toastNotification";
 
 export const createCarCard = (
   name,
@@ -106,23 +108,34 @@ export const createCard = (
     cardCta.classList.toggle("active-cta");
   });
 
-  resetDistanceBtn.addEventListener("click", () => {
-    // const date = new Date();
-    // const year = date.getFullYear();
-    // const month = date.getMonth() + 1;
-    // const day = date.getDate();
+  resetDistanceBtn.addEventListener("click", async () => {
+    try {
+      if (initialDistance === totalDistance) {
+        showToastNotification("ინტერვალი უკვე განახლებულია!", "warning");
+        return;
+      }
 
-    // const fullYear = `${year}-${month}-${day}`;
+      resetDistanceBtn.innerText = "დაელოდეთ...";
+      resetDistanceBtn.disabled = true;
+      await resetInterval(id, totalDistance);
 
-    // addOilChangeRecord(id);
-    cardCta.classList.remove("active-cta");
+      // initialization();
+      showToastNotification("ინტერვალი წარმატებით განულდა!");
+    } catch (error) {
+      console.error("Error resetting interval:", error);
+      showToastNotification("ინტერვალის განახლებისას მოხდა შეცდომა!", "error");
+    } finally {
+      cardCta.classList.remove("active-cta");
+      resetDistanceBtn.innerText = "დაწიყე ათვლა თავიდან";
+      resetDistanceBtn.disabled = false;
+    }
   });
 
   historyBtn.addEventListener("click", () => {
     historyContainer.classList.toggle("history-active");
 
     if (history.length > 0) {
-      createOilChangeHistory(name, totalDistance, resetDate);
+      createOilChangeHistoryTable(name, totalDistance, resetDate, history);
     } else {
       changeHistoryCarName(name);
     }

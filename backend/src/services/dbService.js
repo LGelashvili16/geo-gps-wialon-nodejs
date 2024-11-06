@@ -49,6 +49,13 @@ export const addOilChangeRecord = async (
   oil_change_date,
   kilometers
 ) => {
+  const car = await getCarWithHistory(car_id);
+
+  if (car.initial_distance === car.total_distance) {
+    throw new Error("Interval is already updated!");
+    // return "Interval is already updated!";
+  }
+
   const query = `
     INSERT INTO oil_change_history_tb (car_id, oil_change_date, kilometers) 
     VALUES (?, ?, ?)
@@ -142,7 +149,8 @@ export const getCarWithHistory = async (car_id) => {
   const query = `
     SELECT 
       c.car_id, 
-      c.car_name, 
+      c.car_name,
+      c.initial_distance, 
       c.total_distance, 
       c.next_oil_change_km, 
       c.icon_url,
@@ -170,6 +178,7 @@ export const getCarWithHistory = async (car_id) => {
     const car = {
       car_id: rows[0].car_id,
       car_name: rows[0].car_name,
+      initial_distance: rows[0].initial_distance,
       total_distance: rows[0].total_distance,
       next_oil_change_km: rows[0].next_oil_change_km,
       icon_url: rows[0].icon_url,
@@ -183,7 +192,7 @@ export const getCarWithHistory = async (car_id) => {
         })),
     };
 
-    console.log(`Car ${car_id} with History:`, car);
+    // console.log(`Car ${car_id} with History:`, car);
     return car;
   } catch (error) {
     console.error("Error fetching car with history:", error);
@@ -207,6 +216,13 @@ export const updateTotalDistance = async (carId, newDistance) => {
 };
 
 export const updateInitialDistance = async (carId, newInitialDistance) => {
+  const car = await getCarWithHistory(carId);
+
+  if (car.initial_distance === car.total_distance) {
+    throw new Error("Interval is already updated!");
+    // return "Interval is already updated!";
+  }
+
   const result = await dbPool.query(
     `UPDATE cars_tb SET initial_distance = ?, last_reset_date = NOW() WHERE car_id = ?`,
     [newInitialDistance, carId]
