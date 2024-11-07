@@ -2,6 +2,10 @@ import { BASE_URL } from "../config/apiEndpoints";
 import { initialization } from "../main";
 import { changeInterval, resetInterval } from "../services/api";
 import { getRemainingDistanceDetails } from "../utils/distanceCalculation";
+import { historyBtnAction } from "./actions/historyBtn";
+import { intervalFormAction } from "./actions/intervalForm";
+import { resetDistanceBtnAction } from "./actions/resetDistanceBtn";
+import { settingsBtnAction } from "./actions/settingsBtn";
 import { changeHistoryCarName, createOilChangeHistoryTable } from "./history";
 import { showToastNotification } from "./toastNotification";
 
@@ -44,51 +48,88 @@ export const createCard = (
 
   carCard.setAttribute("data-id", id);
 
-  settingsBtn.addEventListener("click", () => {
-    cardCta.classList.toggle("active-cta");
+  settingsBtnAction(settingsBtn, cardCta);
+
+  // settingsBtn.addEventListener("click", () => {
+  //   cardCta.classList.toggle("active-cta");
+  // });
+
+  resetDistanceBtnAction(resetDistanceBtn, cardCta, {
+    id,
+    initialDistance,
+    totalDistance,
   });
 
-  resetDistanceBtn.addEventListener("click", async () => {
-    try {
-      if (initialDistance === totalDistance) {
-        showToastNotification("ინტერვალი უკვე განახლებულია!", "warning");
-        return;
-      }
+  // resetDistanceBtn.addEventListener("click", async () => {
+  //   try {
+  //     if (initialDistance === totalDistance) {
+  //       showToastNotification("ათვლა უკვე განახლებულია!", "warning");
+  //       return;
+  //     }
 
-      resetDistanceBtn.innerText = "დაელოდეთ...";
-      resetDistanceBtn.disabled = true;
-      await resetInterval(id, totalDistance);
+  //     resetDistanceBtn.innerText = "დაელოდეთ...";
+  //     resetDistanceBtn.disabled = true;
+  //     await resetInterval(id, totalDistance);
 
-      // initialization();
-      showToastNotification("ინტერვალი წარმატებით განულდა!");
-    } catch (error) {
-      console.error("Error resetting interval:", error);
-      showToastNotification("ინტერვალის განახლებისას მოხდა შეცდომა!", "error");
-    } finally {
-      cardCta.classList.remove("active-cta");
-      resetDistanceBtn.innerText = "დაწიყე ათვლა თავიდან";
-      resetDistanceBtn.disabled = false;
-    }
+  //     // initialization();
+  //     showToastNotification("ათვლა წარმატებით განახლდა!");
+  //   } catch (error) {
+  //     console.error("Error resetting interval:", error);
+  //     showToastNotification("ათვლის განახლებისას მოხდა შეცდომა!", "error");
+  //   } finally {
+  //     cardCta.classList.remove("active-cta");
+  //     resetDistanceBtn.innerText = "დაწიყე ათვლა თავიდან";
+  //     resetDistanceBtn.disabled = false;
+  //   }
+  // });
+
+  historyBtnAction(historyBtn, historyContainer, {
+    name,
+    totalDistance,
+    resetDate,
+    history,
   });
 
-  historyBtn.addEventListener("click", () => {
-    historyContainer.classList.toggle("history-active");
+  // historyBtn.addEventListener("click", () => {
+  //   historyContainer.classList.toggle("history-active");
 
-    if (history.length > 0) {
-      createOilChangeHistoryTable(name, totalDistance, resetDate, history);
-    } else {
-      changeHistoryCarName(name);
-    }
-  });
+  //   if (history.length > 0) {
+  //     createOilChangeHistoryTable(name, totalDistance, resetDate, history);
+  //   } else {
+  //     changeHistoryCarName(name);
+  //   }
+  // });
 
-  intervalForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const intervalInput = e.target.interval.value;
+  intervalFormAction(intervalForm, cardCta, { id, threshold });
 
-    if (intervalInput) {
-      changeInterval(id, intervalInput);
-    }
-  });
+  // intervalForm.addEventListener("submit", (e) => {
+  //   const intervalInput = e.target.interval.value;
+  //   const formBtn = e.target.btn;
+
+  //   try {
+  //     e.preventDefault();
+
+  //     formBtn.disabled = true;
+
+  //     if (threshold === +intervalInput) {
+  //       showToastNotification(
+  //         "შეიყვანე განსხვავებული ათვლის ინტერვალი!",
+  //         "warning"
+  //       );
+  //       return;
+  //     }
+
+  //     if (intervalInput) {
+  //       changeInterval(id, intervalInput);
+  //       showToastNotification("ათვლის ინტერვალი განახლდა!");
+  //       cardCta.classList.remove("active-cta");
+  //     }
+  //   } catch (error) {
+  //     showToastNotification("ინტერვალი უკვე განახლებულია!", "error");
+  //   } finally {
+  //     formBtn.disabled = false;
+  //   }
+  // });
 
   carIcon.src = `${BASE_URL}${iconUrl}`;
   carName.innerText = `მანქანა: ${name}`;

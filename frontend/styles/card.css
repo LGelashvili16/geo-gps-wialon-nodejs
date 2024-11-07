@@ -24,8 +24,8 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1em;
-  background-color: #7979795d;
-  backdrop-filter: blur(7px);
+  background-color: #c5c5c59d;
+  backdrop-filter: blur(4px);
   height: 70%;
   transform: translate(40%, -60%) scale(0);
   border-radius: 50%;
@@ -113,34 +113,53 @@
   transition: background-color 0.2s, transform 0.2s;
 }
 
-.btn:hover {
-  background-color: #d74f00;
-}
-
-.btn:active,
-.history-btn:active {
-  transform: scale(0.99);
-}
-
 .reset-distance-btn {
-  color: #fff;
-  background-color: #ff2929;
   border: 1px solid transparent;
+  background-color: #ffffff;
+  box-shadow: #bb2c2c33 0 -25px 18px -14px inset, 0 3px 5px 0 rgba(0, 0, 0, 0.3),
+    0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  color: #000000;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.reset-distance-btn:hover {
+  box-shadow: #bb2c2c33 0 -25px 18px -14px inset, 0 5px 7px 0 rgba(0, 0, 0, 0.3),
+    0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.reset-distance-btn:active {
+  transform: translateY(2px);
+  box-shadow: #bb2c2c33 0 -25px 18px -14px inset,
+    0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.07);
+}
+
+.history-btn {
+  background-color: #fff;
+  color: #000000;
+  border: 1px solid transparent;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.history-btn:hover {
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.3), 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.history-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.07);
 }
 
 .change-threshold-btn {
   color: #fff;
-  background-color: #ff7829;
+  background-color: #ff6d29;
   border: 1px solid transparent;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
-.history-btn {
-  background-color: #3477f3;
-  color: #fff;
-  border: 1px solid transparent;
-}
-.history-btn:hover {
-  background-color: #1145a7;
+.change-threshold-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.07);
 }
 
 .car-distance-details {

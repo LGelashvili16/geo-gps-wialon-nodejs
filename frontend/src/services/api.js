@@ -15,13 +15,16 @@ export const fetchCars = async () => {
 };
 
 export const resetInterval = async (id, coveredKilometers) => {
-  const response = await fetch(`${PROXY_SERVER}/api/cars/${id}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      coveredKilometers,
-    }),
-  });
+  const response = await fetch(
+    `${PROXY_SERVER}/api/cars/reset-interval/${id}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        coveredKilometers,
+      }),
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Failed to reset interval");

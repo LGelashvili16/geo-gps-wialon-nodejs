@@ -132,6 +132,17 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  background-color: #e2e2e2;
+  color: #444444;
+}
+
+button:disabled:hover {
+  background-color: #e2e2e2;
+  color: #444444;
+  cursor: not-allowed;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
