@@ -230,3 +230,12 @@ export const updateInitialDistance = async (carId, newInitialDistance) => {
 
   return result;
 };
+
+export const updateNextIntervalKm = async (id, newInterval) => {
+  const result = await dbPool.query(
+    `UPDATE cars_tb SET next_oil_change_km = ? WHERE car_id = ?`,
+    [+newInterval, id]
+  );
+
+  return result;
+};

@@ -30,3 +30,24 @@ export const resetInterval = async (id, coveredKilometers) => {
   const data = await response.json();
   return data;
 };
+
+export const changeInterval = async (id, newInterval) => {
+  const response = await fetch(
+    `${PROXY_SERVER}/api/cars/change-interval/${id}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        newInterval,
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to change interval threshold!");
+  }
+
+  const data = await response.json();
+
+  return data;
+};

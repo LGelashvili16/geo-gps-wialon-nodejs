@@ -9,6 +9,7 @@ import {
   updateTotalDistance,
   updateInitialDistance,
   getCarWithHistory,
+  updateNextIntervalKm,
 } from "../services/dbService.js";
 
 export const fetchDataAndSave = async (req, res, next) => {
@@ -73,6 +74,19 @@ export const resetIntervalDistance = async (req, res, next) => {
     console.log(updatedInitialDistance);
 
     res.status(200).json(car);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const changeNextIntervalKm = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+
+    const result = await updateNextIntervalKm(id, body.newInterval);
+
+    console.log(result);
   } catch (error) {
     next(error);
   }
