@@ -6,7 +6,7 @@ export const fetchCars = async () => {
   });
 
   if (!response.ok) {
-    throw new error("Failed to fetch cars!");
+    throw new Error("მანქანის მონაცემების მიღება ვერ მოხერხდა!");
   }
 
   const data = await response.json();

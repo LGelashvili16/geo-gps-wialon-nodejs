@@ -30,19 +30,12 @@ export const addCarToCarsTable = async (
 
   try {
     const [dbResult] = await dbPool.query(query, queryArgs);
-    console.log("Car added:", dbResult);
     return dbResult;
   } catch (error) {
     console.error("Error adding car:", error);
     throw error;
   }
 };
-
-// try {
-//   const result = await addCarToCarsTable(15011, "WI 111 NG", 275250);
-// } catch (error) {
-//   console.error(error);
-// }
 
 export const addOilChangeRecord = async (
   car_id,
@@ -51,9 +44,8 @@ export const addOilChangeRecord = async (
 ) => {
   const car = await getCarWithHistory(car_id);
 
-  if (car.initial_distance === car.total_distance) {
+  if (car.initial_distance === kilometers) {
     throw new Error("Interval is already updated!");
-    // return "Interval is already updated!";
   }
 
   const query = `
@@ -65,19 +57,12 @@ export const addOilChangeRecord = async (
 
   try {
     const [dbResult] = await dbPool.query(query, queryArgs);
-    console.log("Record added:", dbResult);
     return dbResult;
   } catch (error) {
     console.error("Error adding oil change record:", error);
     throw error;
   }
 };
-
-// try {
-//   const result = await addOilChangeRecord(15015, "2024-12-07", 293190);
-// } catch (error) {
-//   console.error(error);
-// }
 
 export const getAllCarsWithHistory = async () => {
   const query = `
@@ -138,13 +123,6 @@ export const getAllCarsWithHistory = async () => {
   }
 };
 
-// try {
-//   const result = await getAllCarsWithHistory();
-//   console.log(result);
-// } catch (error) {
-//   console.error(error);
-// }
-
 export const getCarWithHistory = async (car_id) => {
   const query = `
     SELECT 
@@ -192,19 +170,12 @@ export const getCarWithHistory = async (car_id) => {
         })),
     };
 
-    // console.log(`Car ${car_id} with History:`, car);
     return car;
   } catch (error) {
     console.error("Error fetching car with history:", error);
     throw error;
   }
 };
-
-// try {
-//   const result = await getCarWithHistory(15015);
-// } catch (error) {
-//   console.error(error);
-// }
 
 export const updateTotalDistance = async (carId, newDistance) => {
   const result = await dbPool.query(
@@ -220,7 +191,6 @@ export const updateInitialDistance = async (carId, newInitialDistance) => {
 
   if (car.initial_distance === car.total_distance) {
     throw new Error("Interval is already updated!");
-    // return "Interval is already updated!";
   }
 
   const result = await dbPool.query(

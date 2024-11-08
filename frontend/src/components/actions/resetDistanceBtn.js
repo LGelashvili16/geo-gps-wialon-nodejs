@@ -1,3 +1,4 @@
+import { initialization } from "../../main";
 import { resetInterval } from "../../services/api";
 import { showToastNotification } from "../toastNotification";
 
@@ -13,8 +14,8 @@ export const resetDistanceBtnAction = (clickElement, cardCta, carDetails) => {
       clickElement.disabled = true;
       await resetInterval(carDetails.id, carDetails.totalDistance);
 
-      // initialization();
       showToastNotification("ათვლა წარმატებით განახლდა!");
+      initialization();
     } catch (error) {
       console.error("Error resetting interval:", error);
       showToastNotification("ათვლის განახლებისას მოხდა შეცდომა!", "error");

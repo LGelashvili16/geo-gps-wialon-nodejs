@@ -9,21 +9,21 @@ export const showToastNotification = (text, type = null) => {
   clearTimeout(timeout);
 
   if (type === "error") {
-    toast.style.backgroundColor = "#ff05059a";
-    toastText.style.color = "#b80a0a";
-    toastProgress.style.backgroundColor = "#b80a0a";
+    toast.style.backgroundColor = "var(--toast-primary-red)";
+    toastText.style.color = "var(--toast-secondary-red)";
+    toastProgress.style.backgroundColor = "var(--toast-secondary-red)";
   }
 
   if (type === "warning") {
-    toast.style.backgroundColor = "#ff975b9a";
-    toastText.style.color = "#ff5e00";
-    toastProgress.style.backgroundColor = "#ff5e00";
+    toast.style.backgroundColor = "var(--toast-primary-orange)";
+    toastText.style.color = "var(--toast-secondary-orange)";
+    toastProgress.style.backgroundColor = "var(--toast-secondary-orange)";
   }
 
   if (type === null) {
-    toast.style.backgroundColor = "#09e27d9a";
-    toastText.style.color = "#067541";
-    toastProgress.style.backgroundColor = "#067541";
+    toast.style.backgroundColor = "var(--toast-primary-green)";
+    toastText.style.color = "var(--toast-secondary-green)";
+    toastProgress.style.backgroundColor = "var(--toast-secondary-green)";
   }
 
   toast.classList.add("active-toast");

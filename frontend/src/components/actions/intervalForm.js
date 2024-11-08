@@ -1,5 +1,6 @@
 import { changeInterval } from "../../services/api";
 import { showToastNotification } from "../toastNotification";
+import { initialization } from "../../main";
 
 export const intervalFormAction = (intervalForm, cardCta, carDetails) => {
   intervalForm.addEventListener("submit", (e) => {
@@ -23,6 +24,7 @@ export const intervalFormAction = (intervalForm, cardCta, carDetails) => {
         changeInterval(carDetails.id, intervalInput);
         showToastNotification("ათვლის ინტერვალი განახლდა!");
         cardCta.classList.remove("active-cta");
+        initialization();
       }
     } catch (error) {
       showToastNotification("ინტერვალი უკვე განახლებულია!", "error");

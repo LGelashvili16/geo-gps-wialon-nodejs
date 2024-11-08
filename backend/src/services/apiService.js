@@ -14,10 +14,16 @@ const options = {
 export const getSid = async () => {
   try {
     const response = await fetch(wialonUrl, options);
+
     const data = await response.json();
+
+    if (!data.eid) {
+      throw new Error("Failed to get sid!");
+    }
+
     return data.eid;
   } catch (error) {
-    console.error("Error on Fetching the TOKEN!", error);
+    throw new Error(error);
   }
 };
 

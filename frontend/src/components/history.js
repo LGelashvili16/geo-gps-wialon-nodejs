@@ -8,15 +8,9 @@ closeBtn.addEventListener("click", () => {
   tbody.innerHTML = "";
 });
 
-export const createOilChangeHistoryTable = (
-  carName,
-  distance,
-  changeDate,
-  history
-) => {
+export const createOilChangeHistoryTable = (carName, history) => {
+  tbody.innerHTML = "";
   historyCarname.textContent = carName;
-
-  console.log(history);
 
   history.forEach((element) => {
     const date = new Date(element.oil_change_date);

@@ -1,5 +1,3 @@
-// Logic for fetching from external API, processing, saving to DB
-
 import { getAllItems, getSid } from "../services/apiService.js";
 import {
   addCarToCarsTable,
@@ -14,8 +12,6 @@ import {
 
 export const fetchDataAndSave = async (req, res, next) => {
   try {
-    // res.setHeader("Access-Control-Allow-Origin", "*");
-
     const eid = await getSid();
     const allItems = await getAllItems(eid);
 
@@ -38,6 +34,7 @@ export const fetchDataAndSave = async (req, res, next) => {
 
     res.status(200).json(allCarsDb);
   } catch (error) {
+    res.status(500).json({ message: error.message });
     next(error);
   }
 };
@@ -54,24 +51,11 @@ export const resetIntervalDistance = async (req, res, next) => {
 
     const fullYear = `${year}-${month}-${day}`;
 
-    // console.log(id);
-    // console.log(fullYear);
-    // console.log(body);
+    await addOilChangeRecord(id, fullYear, body.coveredKilometers);
 
-    const updatedInitialDistance = await updateInitialDistance(
-      id,
-      body.coveredKilometers
-    );
-
-    const addRecord = await addOilChangeRecord(
-      id,
-      fullYear,
-      body.coveredKilometers
-    );
+    await updateInitialDistance(id, body.coveredKilometers);
 
     const car = await getCarWithHistory(id);
-
-    console.log(updatedInitialDistance);
 
     res.status(200).json(car);
   } catch (error) {
@@ -84,9 +68,11 @@ export const changeNextIntervalKm = async (req, res, next) => {
     const { id } = req.params;
     const body = req.body;
 
-    const result = await updateNextIntervalKm(id, body.newInterval);
+    await updateNextIntervalKm(id, body.newInterval);
 
-    console.log(result);
+    const car = await getCarWithHistory(id);
+
+    res.status(200).json(car);
   } catch (error) {
     next(error);
   }

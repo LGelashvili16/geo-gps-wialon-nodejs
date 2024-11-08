@@ -22,8 +22,19 @@
           </div>
           <h1>ზეთის შეცვლის კონტროლი</h1>
         </div>
+
+        <!-- <div class="login-wrapper">
+          <p>მონაცემების მისაღებად გაიარეთ ავტორიზაცია.</p>
+          <button id="loginButton">გაიარე ავტორიზაცია</button>
+        </div> -->
+
+        <div class="error-msg">
+          <h2></h2>
+        </div>
+
         <div class="loader">
           <h2>იტვირთება...</h2>
+          <h2></h2>
         </div>
 
         <div class="cars-container">
@@ -40,7 +51,12 @@
                 <form id="interval-form">
                   <label for="interval-input">შეცვალე ათვლის ინტერვალი</label>
                   <div>
-                    <input type="number" id="interval-input" name="interval" />
+                    <input
+                      type="number"
+                      id="interval-input"
+                      name="interval"
+                      required
+                    />
                     <button class="btn change-threshold-btn" id="btn">
                       შეცვლა
                     </button>

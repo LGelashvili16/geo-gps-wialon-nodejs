@@ -1,3 +1,14 @@
+:root {
+  --card-shadow: #e6e6e6;
+  --card-hover-shadow: #bbbbbb;
+
+  --card-cta-bg: #c5c5c59d;
+
+  --reset-btn: #ffffff;
+  --history-btn: #ffffff;
+  --history-btn-txt: #000000;
+}
+
 .car-card {
   display: flex;
   flex-direction: column;
@@ -6,12 +17,12 @@
   position: relative;
   padding: 1em 1.5em;
   border-radius: 0.5em;
-  box-shadow: 0 0 20px 5px #e6e6e6;
+  box-shadow: 0 0 20px 5px var(--card-shadow);
   transition: box-shadow 0.4s;
 }
 
 .car-card:hover {
-  box-shadow: 0 0 25px 5px #bbbbbb;
+  box-shadow: 0 0 25px 5px var(--card-hover-shadow);
 }
 
 .card-cta {
@@ -24,7 +35,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1em;
-  background-color: #c5c5c59d;
+  background-color: var(--card-cta-bg);
   backdrop-filter: blur(4px);
   height: 70%;
   transform: translate(40%, -60%) scale(0);
@@ -115,7 +126,7 @@
 
 .reset-distance-btn {
   border: 1px solid transparent;
-  background-color: #ffffff;
+  background-color: var(--reset-btn);
   box-shadow: #bb2c2c33 0 -25px 18px -14px inset, 0 3px 5px 0 rgba(0, 0, 0, 0.3),
     0 1px 2px 0 rgba(0, 0, 0, 0.2);
   color: #000000;
@@ -128,14 +139,13 @@
 }
 
 .reset-distance-btn:active {
-  transform: translateY(2px);
   box-shadow: #bb2c2c33 0 -25px 18px -14px inset,
     0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.07);
 }
 
 .history-btn {
-  background-color: #fff;
-  color: #000000;
+  background-color: var(--history-btn);
+  color: var(--history-btn-txt);
   border: 1px solid transparent;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
@@ -145,20 +155,18 @@
 }
 
 .history-btn:active {
-  transform: translateY(2px);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.07);
 }
 
 .change-threshold-btn {
   color: #fff;
-  background-color: #ff6d29;
+  background-color: var(--primary-orange);
   border: 1px solid transparent;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .change-threshold-btn:active {
-  transform: translateY(2px);
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.07);
 }
 

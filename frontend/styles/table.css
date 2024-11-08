@@ -1,10 +1,18 @@
+:root {
+  --history-container-bg: #7a7a7aa4;
+  --history-header-bg: #e4e4e496;
+  --table-bg: #ffffff62;
+  --thead-bg: #fcca9079;
+  --odd-row-bg: #ffffff96;
+}
+
 .history-container {
   position: absolute;
   inset: 15% 17%;
   display: flex;
   visibility: hidden;
   flex-direction: column;
-  background-color: #7a7a7aa4;
+  background-color: var(--history-container-bg);
   backdrop-filter: blur(5px);
   border-radius: 0.6em;
   transform: translate(-150%, 0);
@@ -22,13 +30,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e4e4e496;
+  background-color: var(--history-header-bg);
   border-top-left-radius: 0.6em;
   border-top-right-radius: 0.6em;
 }
 
+.close-btn {
+  padding: 0.4em;
+  border-radius: 0.3em;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 15px 10px 5px #ff000025 inset, 0 3px 7px 2px #ff000031;
+  font-size: 0.9em;
+  transition: box-shadow 0.2s ease-out, transform 0.2s;
+}
+
+.close-btn:hover {
+  box-shadow: 0 0 10px 3px #ff000033 inset, 0 3px 10px 5px #ff000042;
+}
+
+.close-btn:active {
+  box-shadow: 0 0 10px 3px #ff000033 inset, 0 2px 3px 1px #ff000042;
+}
+
 .oil-change-table {
-  background-color: #ffffff62;
+  background-color: var(--table-bg);
   border-collapse: collapse;
   border-radius: 0.6em;
   font-size: 0.9em;
@@ -36,9 +62,14 @@
   overflow-y: scroll;
 }
 
+.oil-change-table th,
+.oil-change-table td {
+  width: 33.3%;
+}
+
 .oil-change-table thead tr {
   text-align: left;
-  background-color: #fcca9079;
+  background-color: var(--thead-bg);
   font-weight: bold;
 }
 
@@ -60,7 +91,7 @@
 }
 
 .oil-change-table tbody tr:nth-child(odd) {
-  background-color: #ffffff96;
+  background-color: var(--odd-row-bg);
 }
 
 .oil-change-table tbody tr:last-child td:first-child {
@@ -69,4 +100,37 @@
 
 .oil-change-table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 0.6em;
+}
+
+@media (max-width: 1280px) {
+  /* .history-container {
+    position: absolute;
+    inset: 15% 17%;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    background-color: var(--history-container-bg);
+    backdrop-filter: blur(5px);
+    border-radius: 0.6em;
+    transform: translate(-150%, 0);
+    overflow-y: scroll;
+    transition: 0.4s ease;
+  } */
+
+  .table-header h3 {
+    font-size: 1em;
+  }
+
+  .close-btn {
+    font-size: 0.8em;
+  }
+
+  .oil-change-table {
+    font-size: 0.8em;
+  }
+
+  .oil-change-table th,
+  .oil-change-table td {
+    padding: 0.5em 0.6em;
+  }
 }
