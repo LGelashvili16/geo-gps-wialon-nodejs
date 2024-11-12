@@ -1,4 +1,3 @@
-// Routes for API proxy functionality
 import express from "express";
 import {
   changeNextIntervalKm,
