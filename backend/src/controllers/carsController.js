@@ -1,4 +1,8 @@
-import { getAllItems, getSid } from "../services/apiService.js";
+import {
+  getAllItems,
+  getCarLocation,
+  loginUser,
+} from "../services/apiService.js";
 import {
   addCarToCarsTable,
   addOilChangeRecord,
@@ -12,10 +16,13 @@ import {
 
 export const fetchDataAndSave = async (req, res, next) => {
   try {
-    const eid = await getSid();
+    const { eid, userId } = await loginUser();
+
     const allItems = await getAllItems(eid);
 
     for (const item of allItems.items) {
+      await getCarLocation(item.pos.y, item.pos.x, userId, eid);
+
       const exists = await carExists(item.id);
       if (!exists) {
         await addCarToCarsTable(
@@ -32,7 +39,8 @@ export const fetchDataAndSave = async (req, res, next) => {
 
     const allCarsDb = await getAllCarsWithHistory();
 
-    res.status(200).json(allCarsDb);
+    res.status(200).json(allItems);
+    // res.status(200).json(allCarsDb);
   } catch (error) {
     res.status(500).json({ message: error.message });
     next(error);

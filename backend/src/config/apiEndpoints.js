@@ -8,3 +8,6 @@ export const LOGOUT_URL =
 
 export const ALL_CARS_URL =
   "https://local.geogps.ge/wialon/ajax.html?svc=core/search_items&params=";
+
+export const LOCATION_URL =
+  "https://geocode-maps.wialon.com/local.geogps.ge/gis_geocode";
